@@ -69,12 +69,15 @@ $tasks = $todo->all();
         <!-- １７　タスクに入っているname（名前）due-dateと（日づけ）を1個ずつ出力しようとしている
         これをすると名前と日付を取得できるので一覧の表示ができるようになる -->
             <td><?php echo $task['name']; ?></td>
-            <td><?php echo $task['due-date']; ?></td>
+            <td><?php echo $task['due_date']; ?></td>
             <td>
-                <a class="text-success" href="">EDIT</a>
+            <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
             </td>
             <td>
-                <a class="text-danger" href="">DELETE</a>
+            <!-- ２３　EDITをクリックするとedit.phpファイルにリンクすることができるようにする
+            aタグを使うとGETが使える -->
+            <!-- href以降のところをかくとクリックしたidをそれぞれ取得することができる -->
+            <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
             </td>
         </tr>
         <!--/ ここ以上後ほど繰り返し処理する-->

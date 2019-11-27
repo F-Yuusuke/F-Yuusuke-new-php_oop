@@ -44,6 +44,27 @@ class Todo
         return $tasks;
 
        }
+
+    //２６　新しいメソッドをこのclassの中に追加
+    //editするためのデータを取得 editがgetに変わっている？？よくわからない
+    // stmtにidの情報を取得している
+    // executeとgetのidは繋がっているから入る
+    public function get($id)
+    {
+    $stmt = $this->db_manager->dbh->prepare('SELECT * FROM '.$this->table.' WHERE id = ?');
+    $stmt->execute([$id]);
+    // ２６　fetchは一個だけ単体で取れるfetchallは全ての情報を取得する
+    // 今回だとidごとの情報を取っている
+    $task = $stmt->fetch();
+    // ２６　この後どこかで使うからこのreturnを使っている
+    return $task;
+    }
+    // ３４　どんなメソッドを作れば更新できる設計図を書くのかを考える
+    public function update($id)
+    {
+    $stmt = $this->db_manager->dbh->prepare('UPDATE'.$this->table.'SET name = ?  WHERE id = ?');
+    $stmt->execute([$name, $id]);
+    }
 }
 
 
