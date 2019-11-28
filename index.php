@@ -77,8 +77,9 @@ $tasks = $todo->all();
         <tr>
         <!-- １７　タスクに入っているname（名前）due-dateと（日づけ）を1個ずつ出力しようとしている
         これをすると名前と日付を取得できるので一覧の表示ができるようになる -->
+        <!-- ５０　日付を日本人が見えやすいように月何日というように変更 -->
             <td><?php echo $task['name']; ?></td>
-            <td><?php echo $task['due_date']; ?></td>
+            <td><?php echo date('F.d,Y', strtotime($task['due_date']))?></td>
             <td>
             <!-- ４８　以下の<i class="fas fa-edit"></i>はフォントアンセムからパクってきたものでパクってくると文字だったところが -->
             <!-- フォントアンセムのアイコンに変わる -->
