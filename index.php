@@ -77,7 +77,7 @@ $tasks = $todo->all();
             <!-- ２３　EDITをクリックするとedit.phpファイルにリンクすることができるようにする
             aタグを使うとGETが使える -->
             <!-- href以降のところをかくとクリックしたidをそれぞれ取得することができる -->
-            <a class="text-success" href="edit.php?id=<?php echo h($task['id']); ?>">EDIT</a>
+            <a class="text-info" href="delete.php?id=<?php echo h($task['id']); ?>">DELETE</a>
             </td>
         </tr>
         <!--/ ここ以上後ほど繰り返し処理する-->

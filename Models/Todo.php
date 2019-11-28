@@ -60,10 +60,22 @@ class Todo
     return $task;
     }
     // ３４　どんなメソッドを作れば更新できる設計図を書くのかを考える
+    // 以下のupdateって書かれているところはメソッドの名前だから他の人がみても
+    // 何をするメソッドなのかがわかるようにしておく
     public function update($name,$id)
     {
     $stmt = $this->db_manager->dbh->prepare('UPDATE '.$this->table.' SET name = ?  WHERE id = ?');
     $stmt->execute([$name, $id]);
+    }
+
+    // ４２　削除機能ができる設計図をかく
+    // 削除するに必要なのはidだけだからdeleteの横のかっこに入っている
+    // 変数は$idのみ
+    public function delete($id)
+    {
+    // ４２　合致するデータを探してそれを削除している
+    $stmt = $this->db_manager->dbh->prepare('DELETE FROM '.$this->table.' WHERE id = ?');
+    $stmt->execute([$id]);  
     }
 }
 
