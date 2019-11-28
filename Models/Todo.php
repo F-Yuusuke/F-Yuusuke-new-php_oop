@@ -2,7 +2,7 @@
 // １　1回だけしか呼び出さないからこの書き方
 // 自分以外のファイルを読み込む時に使う組み込み関数
 // config/dbconnect.phpを読み込んでくださいと言っている
-require_once ('config/dbconnect.php');
+require_once('config/dbconnect.php');
 
 // 2class Todoを作る
 class Todo 
@@ -60,9 +60,9 @@ class Todo
     return $task;
     }
     // ３４　どんなメソッドを作れば更新できる設計図を書くのかを考える
-    public function update($id)
+    public function update($name,$id)
     {
-    $stmt = $this->db_manager->dbh->prepare('UPDATE'.$this->table.'SET name = ?  WHERE id = ?');
+    $stmt = $this->db_manager->dbh->prepare('UPDATE '.$this->table.' SET name = ?  WHERE id = ?');
     $stmt->execute([$name, $id]);
     }
 }
