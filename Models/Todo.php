@@ -8,7 +8,7 @@ require_once('config/dbconnect.php');
 class Todo 
 {
     // ３　データベースの中の値をこのclassの中で使えるように宣言
-    // class DbManagerを実体化したものをここに書いている
+    // dbconnect.phpで作ったclass DbManagerを使いたいからここに書いている
     private $table = 'tasks';
     private $db_manager;
 
@@ -21,11 +21,13 @@ class Todo
         $this->db_manager->connect();
     }
     // ７　これをかく prepare excuteが関わってくるよ
-    // Todo用のデータを作成するために（レコードの中にデータを入れるために）以下を書いています
+    // Todo用のデータを作成するために（レコードの中にデータを入れるため）以下を書いています
+    // ５３　更新した日付と登録した日付の更新がうまく表示されないので以下のメソッドの内容を書き換えます。
     public function create($name)
     {
-        $stmt = $this->db_manager->dbh->prepare('INSERT INTO '.$this->table.' (name) VALUES (?)');
-        $stmt->execute([$name]);
+        $stmt = $this->db_manager->dbh->prepare('INSERT INTO '.$this->table.' (name, created_at) VALUES (? ,?)');
+        $created = date('Y-m-d H:i:s', time());
+        $stmt->execute([$name,$created]);
     }
 
     public function all()
@@ -62,10 +64,14 @@ class Todo
     // ３４　どんなメソッドを作れば更新できる設計図を書くのかを考える
     // 以下のupdateって書かれているところはメソッドの名前だから他の人がみても
     // 何をするメソッドなのかがわかるようにしておく
+    // ５１　今しているのはupdateして更新された日が登録できる
     public function update($name,$id)
     {
-    $stmt = $this->db_manager->dbh->prepare('UPDATE '.$this->table.' SET name = ?  WHERE id = ?');
-    $stmt->execute([$name, $id]);
+    // ５１　updated_at = ?を付け足した
+    // $updated = date('Y-m-d H:i;s', time());を付け足した　Y-m-d H:i;s'は年月とかそれぞれ意味がある
+    $stmt = $this->db_manager->dbh->prepare('UPDATE '.$this->table.' SET name = ? , updated_at = ? WHERE id = ?');
+    $updated = date('Y-m-d H:i;s', time());
+    $stmt->execute([$name, $updated, $id]);
     }
 
     // ４２　削除機能ができる設計図をかく

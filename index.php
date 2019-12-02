@@ -17,7 +17,7 @@ $todo = new Todo();
 $tasks = $todo->all();
 //
 // echo '<pre>';
-// var_dump($tasks);
+// var_dump($tasks2);
 // １５　exitは処理を中断するということexitより下のものは処理をやめさせる魔法の言葉
 // これをやらないと見えずらいことがあるからexitを使う
 // 値を確認するときにexitを使う
@@ -71,15 +71,26 @@ $tasks = $todo->all();
       <tbody>
       <!-- １６　tasksにはデータベースの情報が全て入っている（index.php１４行目）のでその情報を1個ずつ取り出したいから
       foreachをしている -->
-      <?php foreach($tasks as $task):?>
+      <?php foreach($tasks2 as $task):?>
 
         <!--ここ以下後ほど繰り返し処理する-->
         <tr>
         <!-- １７　タスクに入っているname（名前）due-dateと（日づけ）を1個ずつ出力しようとしている
         これをすると名前と日付を取得できるので一覧の表示ができるようになる -->
         <!-- ５０　日付を日本人が見えやすいように月何日というように変更 -->
-            <td><?php echo $task['name']; ?></td>
+            <td><?php echo $task['word']; ?></td>
             <td><?php echo date('F.d,Y', strtotime($task['due_date']))?></td>
+            <!-- ５２　更新したものの年月日が表紙されるようにしている
+            　上が登録されて日で下が更新された日　今のままだと更新されていない日が出てきているので
+            次はこれが表示されないようにする
+            今回はこのままだと更新された日しか表示されないのでデータベースの設定を
+            変更してあげる必要がある　今回のデフォルトの設定では今やっていることができない -->
+            <td>registered:<?php echo date('Y年m月d日', strtotime(h($task['due_date']))); ?>
+            <br>
+            modified:<?php echo date('Y年m月d日', strtotime(h($task['updated_at']))); ?>
+            </td>
+
+            
             <td>
             <!-- ４８　以下の<i class="fas fa-edit"></i>はフォントアンセムからパクってきたものでパクってくると文字だったところが -->
             <!-- フォントアンセムのアイコンに変わる -->
