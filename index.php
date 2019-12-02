@@ -49,12 +49,19 @@ $tasks = $todo->all();
 </header>
 <main class="container py-5">
 <section>
-        <form class="form-row justify-content-center" action="create.php" method="POST">
+<!-- ５５　action="create.php" method="POST"はJavaScriptで送信とかをさせるからphpでやらせるんじゃなくて
+JavaScriptでやらせる -->
+        <form class="form-row justify-content-center" >
             <div class="col-10 col-md-6 py-2">
-                <input type="text" class="form-control" placeholder="ADD TODO" name="task">
+            <!-- ５６　inputに操作しやすいようにidをつける -->
+                <!-- <input type="text" class="form-control" placeholder="ADD TODO" name="task"> -->
+                <!-- ５６以下のコードに変更 -->
+                <input type="text" class="form-control" placeholder="ADD TODO" name="task" id="js-task">
             </div>
             <div class="py-2 col-md-3 col-10">
-                <button type="submit" class="col-12 btn btn-primary">ADD</button>
+            <!-- ５７ 操作しやすいようにbuttonも変更id-->
+                <!-- <button type="submit" class="col-12 btn btn-primary">ADD</button> -->
+                <button class="col-12 btn btn-primary" id="js-add-task">ADD</button>
             </div>
         </form>
 </section>
@@ -95,7 +102,14 @@ $tasks = $todo->all();
   </table>
 </section>
     </section>
-
 </main>
+<!-- ５２先にjQueryをJavaScriptより先に読み込ませておかないといけない
+app.jsでjQueryを先に読み込んでっていうコードを書くけど
+それでももしかしたJavaScriptがjQueryを追い越してしまうかもしれないから
+JavaScriptより先に読み込ませる
+CDNのなかにある以下のコード　CDNは天才たちが作ってくれたコードを使って言いよっていうサービス -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- ５０ このファイルでapp.jsが使えるようにするために以下の処理をしている-->
+<script src="assets/js/app.js"></script>
 </body>
 </html>

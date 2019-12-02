@@ -26,6 +26,13 @@ class Todo
     {
         $stmt = $this->db_manager->dbh->prepare('INSERT INTO '.$this->table.' (name) VALUES (?)');
         $stmt->execute([$name]);
+
+        // ５４　ここの値を使うからリターンをしている
+        // そのほかはわからない
+        // 最後の行に追加した情報をreturnに追加している
+        // ここで行なっているのは2つ
+        // データの登録と、最後に追加したレコードのidを取得
+        return $this->db_manager->dbh->lastInsertId();
     }
 
     public function all()
