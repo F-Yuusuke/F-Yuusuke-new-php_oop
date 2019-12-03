@@ -80,7 +80,9 @@ JavaScriptでやらせる -->
       <?php foreach($tasks as $task):?>
 
         <!--ここ以下後ほど繰り返し処理する-->
-        <tr>
+        <!-- ６５　１２月３日 　行のことをそれぞれ識別できるようにidをつけてあげている
+        idがつくことによって操作がしやすくなる-->
+        <tr id="js-task-<?php echo h($task['id']); ?>">
         <!-- １７　タスクに入っているname（名前）due-dateと（日づけ）を1個ずつ出力しようとしている
         これをすると名前と日付を取得できるので一覧の表示ができるようになる -->
             <td><?php echo $task['name']; ?></td>
@@ -92,7 +94,9 @@ JavaScriptでやらせる -->
             <!-- ２３　EDITをクリックするとedit.phpファイルにリンクすることができるようにする
             aタグを使うとGETが使える -->
             <!-- href以降のところをかくとクリックしたidをそれぞれ取得することができる -->
-            <a class="text-info" href="delete.php?id=<?php echo h($task['id']); ?>">DELETE</a>
+            <!-- ６６　これも画面遷移をせずに情報が反映されるようにしている 
+            もともと書いてあったphpのやつを削除して以下のように変更-->
+            <a class="text-danger" id="js-delete-btn-<?php echo h($task['id']) ?>" href="">DELETE</a>
             </td>
         </tr>
         <!--/ ここ以上後ほど繰り返し処理する-->

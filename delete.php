@@ -1,5 +1,5 @@
-<!-- ４１　削除機能を作るためにこのファイルを作った -->
 <?php
+// <!-- ４１　削除機能を作るためにこのファイルを作った -->
 // ４３ 'Models/Todo.php'ファイルをリクワイヤーする
 // なぜならclassTodoの中に使いたいメソッドがあるから
 require_once ('Models/Todo.php');
@@ -16,8 +16,16 @@ $todo = new Todo();
 $todo->delete($id);
 
 // ４７　登録した後にトップのページに戻るためだけに以下を書いた
-header('Location: index.php');
+// ７７　下記を削除画面遷移しないので
+// header('Location: index.php');
 
+// ７８　classTodoのcreateメソッドを実行
+$res = $todo->delete($id);
+
+// ７９　上記で値を取ってきてその値を取得している
+// ここでphpを抜けたい　jsに戻りたいから
+echo json_encode($res);
+exit();
 
 
 ?>
